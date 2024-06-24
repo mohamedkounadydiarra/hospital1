@@ -19,6 +19,7 @@
             </ul>
         </div>
          @endif
+    <a href="{{route('formcreatespecialite')}}" class="btn btn-primary">Add</a>
     <table class="datatable table table-hover table-center mb-0">
     <thead>
     <tr>

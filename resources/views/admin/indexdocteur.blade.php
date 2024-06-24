@@ -19,6 +19,8 @@
             </ul>
         </div>
          @endif
+
+        <a href="{{route('docteur_create')}}" class="btn btn-primary">Add</a>
     <table class="datatable table table-hover table-center mb-0">
     <thead>
     <tr>
