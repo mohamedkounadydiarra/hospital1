@@ -14,8 +14,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $docteur = Docteur::orderBy('created_at','desc')->paginate('10');
-        return view('admin/indexdocteur',compact('docteur'));
+        //$docteur = Docteur::orderBy('created_at','desc')->paginate('10');
+        //return view('admin/indexdocteur',compact('docteur'));
     }
 
     /**

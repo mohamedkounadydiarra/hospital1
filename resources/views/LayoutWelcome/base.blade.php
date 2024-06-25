@@ -76,10 +76,10 @@
 </div>
 <ul class="nav header-navbar-rht">
 <li class="register-btn">
-<a href="{{route('loginform')}}" class="btn log-btn"><i class="feather-lock"></i>Connexion</a>
+<a href="{{route('login_form')}}" class="btn log-btn"><i class="feather-lock"></i>Connexion</a>
 </li>
 <li class="register-btn">
-<a href="{{route('patientcreate')}}" class="btn reg-btn"><i class="feather-user"></i>Creer compte</a>
+<a href="{{route('register')}}" class="btn reg-btn"><i class="feather-user"></i>Creer compte</a>
 </li>
 </ul>
 </nav>

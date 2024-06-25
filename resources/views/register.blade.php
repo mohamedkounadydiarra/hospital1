@@ -29,50 +29,58 @@
             </div>
              @endif
            
-            <form action="{{route('patientcreatestore')}}" method="post">
+            <form action="{{route('register_store')}}" method="post">
             @csrf 
             @method('post')
             <div class="mb-3 form-focus">
-                <input type="text" name="pseudo" class="form-control floating">
-                <label class="focus-label">Identifiant</label>
+                <input type="text" name="nom" value="{{old('nom')}}" class="form-control floating">
+                <label class="focus-label">Nom</label>
+            </div>
+            <div class="mb-3 form-focus">
+                <input type="text" name="prenom" value="{{old('prenom')}}" class="form-control floating">
+                <label class="focus-label">Prenom</label>
+            </div>
+            <div class="mb-3 form-focus">
+                <input type="text" name="photo" value="{{old('photo')}}" class="form-control floating">
+                <label class="focus-label">Photo</label>
+            </div>
+        
+            <div class="mb-3 form-focus">
+                <input type="text" name="email" value="{{old('email')}}" class="form-control floating">
+                <label class="focus-label">email</label>
+            </div>
+                       
+            <div class="mb-3 form-focus">
+                <input type="date" name="datenaiss" value="{{old('datenaiss')}}" class="form-control floating">
+                <label class="focus-label">date naissance</label>
+            </div>
+            <div class="mb-3 form-focus">
+                <input type="text" name="telephone" value="{{old('telephone')}}" class="form-control floating">
+                <label class="focus-label">telephone</label>
             </div>
             <div class="mb-3 form-focus">
                 <input type="password" name="password" class="form-control floating">
                 <label class="focus-label">Password</label>
             </div>
             <div class="mb-3 form-focus">
-                <input type="password" name="nom" class="form-control floating">
-                <label class="focus-label">Nom</label>
-            </div>
-            <div class="mb-3 form-focus">
-                <input type="password" name="prenom" class="form-control floating">
-                <label class="focus-label">Prenom</label>
-            </div>
-            <div class="mb-3 form-focus">
-                <input type="email" name="email" class="form-control floating">
-                <label class="focus-label">Email</label>
-            </div>
-            <div class="mb-3 form-focus">
-                <input type="date" name="datenaiss" class="form-control floating">
-                <label class="focus-label">date naissance</label>
-            </div>
-            <div class="mb-3 form-focus">
-                <input type="password" name="telephone" class="form-control floating">
-                <label class="focus-label">telephone</label>
-            </div>
-            <div class="mb-3 form-focus">
-                <input type="text" name="taille" class="form-control floating">
+                <input type="text" name="taille" value="{{old('taille')}}" class="form-control floating">
                 <label class="focus-label">taille</label>
             </div>
             <div class="mb-3 form-focus">
-                <input type="number" name="poid" class="form-control floating">
+                <input type="number" name="poid" value="{{old('poid')}}" class="form-control floating">
                 <label class="focus-label">Poid</label>
             </div>
+   
 
+
+            <div class="mb-3 form-focus">
+                <input type="hidden" name="role" value="patient" class="form-control floating">
+               
+            </div>
            
             <button class="btn btn-primary w-100 btn-lg login-btn" type="submit">Creer</button>
             
-            <div class="text-center dont-have">deja un compte? <a href="{{route('loginform')}}">connexion</a></div>
+            <div class="text-center dont-have">deja un compte? <a href="{{route('login_form')}}">connexion</a></div>
             </form>
             </div>
             </div>

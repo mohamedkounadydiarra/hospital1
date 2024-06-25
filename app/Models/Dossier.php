@@ -8,15 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Dossier extends Model
 {
     use HasFactory;
-    protected $fillable = ['description','traitement','idpatient','iddocteur'];
+    protected $fillable = ['description','traitement','iduser'];
 
-    public function docteur()
+    public function user()
     {
-        return $this->belongsTo(Docteur::class,'iddocteur');
+        return $this->belongsTo(User::class,'iduser');
     }
 
-    public function patient()
-    {
-        return $this->belongsTo(Patient::class,'idpatient');
-    }
+   
 }

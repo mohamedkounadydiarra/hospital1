@@ -5,13 +5,13 @@
     
     <div class="card">
     <div class="card-header">
-    <h5 class="card-title">Ajout specialite</h5>
+    <h5 class="card-title">Editer specialite</h5>
     </div>
     <div class="card-body">
     <div class="row">
     <div class="col-sm">
 
-        <form class="needs-validation" action="{{ route('updatespecialite',['id' => $specialite->id]) }}" method="post">
+        <form class="needs-validation" action="{{ route('specialite_update',['id' => $specialite->id]) }}" method="post">
         @csrf 
         @method('put')
         <div class="row">

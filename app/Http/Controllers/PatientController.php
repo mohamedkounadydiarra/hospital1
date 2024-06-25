@@ -43,7 +43,7 @@ class PatientController extends Controller
         ]);
 
         // Créer un nouveau patient avec les données validées
-        $patient = Patient::create([
+        $patient = User::create([
             'nom' => $request->nom,
             'prenom' => $request->prenom,
             'email' => $request->email,

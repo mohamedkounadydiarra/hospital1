@@ -19,13 +19,14 @@
             </ul>
         </div>
          @endif
-    <a href="{{route('formcreatespecialite')}}" class="btn btn-primary">Add</a>
+    <a href="{{route('specialite_create')}}" class="btn btn-primary">Add</a>
     <table class="datatable table table-hover table-center mb-0">
     <thead>
     <tr>
-        <th>Specialite ID</th>
-        <th>Nom</th>
+        <th>Specialite ID</th> 
         <th>image</th>
+        <th>Nom</th>
+       
     </tr>
     </thead>
     <tbody>
@@ -38,8 +39,8 @@
         </h2>
         </td>
         <td>{{$specialites->nomspecialite}}</td>
-        <td><a href="{{route('deletespecialite',['id' => $specialites->id])}}" class="btn btn-danger">Delete</a></td>
-        <td><a href="{{route('editerspecialite',['id' => $specialites->id])}}"  class="btn btn-primary">editer</a></td>
+        <td><a href="{{route('specialite_delete',['id' => $specialites->id])}}" class="btn btn-danger">Delete</a></td>
+        <td><a href="{{route('specialite_edit',['id' => $specialites->id])}}"  class="btn btn-primary">editer</a></td>
     
     </tr>
         @endforeach

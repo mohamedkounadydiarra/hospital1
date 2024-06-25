@@ -10,9 +10,9 @@ class Planing extends Model
     use HasFactory;
     protected $fillable = ['datedisponible','jour','iddocteur'];
 
-    public function docteur()
+    public function user()
     {
-        return $this->belongsTo(Docteur::class,'iddocteur');
+        return $this->belongsTo(User::class,'iduser');
     }
 
     public function consultation()

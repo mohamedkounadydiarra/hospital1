@@ -8,16 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Consultation extends Model
 {
     use HasFactory;
-    protected $fillable = ['statut','idpatient','iddocteur','idplaning'];
+    protected $fillable = ['statut','iduser','idplaning'];
 
-    public function patient()
+    public function user()
     {
-        return $this->belongsTo(Patient::class,'idpatient');
-    }
-
-    public function docteur()
-    {
-        return $this->hasMany(Docteur::class,'iddocteur');
+        return $this->belongsTo(User::class,'iduser');
     }
 
     public function planing()

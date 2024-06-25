@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Docteur;
 use App\Models\Specialite;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class DocteurController extends Controller
 {
@@ -13,8 +16,12 @@ class DocteurController extends Controller
      */
     public function index()
     {
-        $docteur = Docteur::with('specialite')->orderBy('created_at', 'desc')->paginate(3);
-        return view('admin/indexdocteur', compact('docteur'));
+        $docteur = User::where('role', 'docteur') // Filtre pour les utilisateurs ayant le rôle 'admin'
+        ->with('specialite')   // Charger la relation 'specialite'
+        ->orderBy('created_at', 'desc')
+        ->paginate(3);
+
+return view('admin.docteur_index', compact('docteur'));
     }
 
     /**
@@ -31,25 +38,40 @@ class DocteurController extends Controller
      */
     public function store(Request $request)
     {
+        // Valider les données du formulaire
         $request->validate([
-            'pseudo' => 'required|string|max:255',
-            'password' => 'required|string|min:8',
-            'telephone' => 'required|string|max:15',
-            'email' => 'required|string|email|max:255|unique:docteurs',
+            'nom' => 'required|string|max:255',
+            'prenom' => 'required|string|max:255',
             'photo' => 'nullable|string|max:255',
-            'idspecialite' => 'required|exists:specialites,id',
+            'email' => 'required|string|email|max:255|unique:users',
+            'datenaiss' => 'required|date',
+            'telephone' => 'required|string|max:15',
+            'password' => 'required|string|min:8',
+            'taille' => 'nullable|string|max:10',
+            'poid' => 'nullable|numeric',
+            'role' => 'required|string|max:255',
+            'idspecialite' => 'required|string|max:255'
         ]);
 
-        Docteur::create([
-            'pseudo' => $request->pseudo,
-            'password' => md5($request->password),
-            'telephone' => $request->telephone,
-            'email' => $request->email,
+       
+
+        // Créer un nouvel utilisateur
+        $docteur = User::create([
+            'nom' => $request->nom,
+            'prenom' => $request->prenom,
             'photo' => $request->photo,
-            'idspecialite' => $request->idspecialite,
+            'email' => $request->email,
+            'datenaiss' => $request->datenaiss,
+            'telephone' => $request->telephone,
+            'password' => Hash::make($request->password),
+            'taille' => $request->taille,
+            'poid' => $request->poid,
+            'role' => $request->role,
+            'idspecialite' => $request->idspecialite
         ]);
-
-        return redirect()->back()->with('success', 'Docteur créé avec succès.');
+     
+        // Rediriger l'utilisateur avec un message de succès
+        return redirect()->route('docteur_index')->with('success', 'docteur créé avec succès. Vous pouvez maintenant vous connecter.');
     }
 
     /**
@@ -65,7 +87,7 @@ class DocteurController extends Controller
      */
     public function edit(string $id)
     {
-        $docteur = Docteur::findOrFail($id);
+        $docteur = User::findOrFail($id);
         $specialite = Specialite::all();
         return view('admin/docteur_edit', compact('docteur', 'specialite'));
     }
@@ -75,24 +97,40 @@ class DocteurController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'pseudo' => 'required|string|max:255',
-            'password' => 'nullable|string|min:8',
-            'telephone' => 'required|string|max:15',
-            'email' => 'required|string|email|max:255|unique:docteurs,email,' . $id,
+         // Valider les données du formulaire
+         $request->validate([
+            'nom' => 'required|string|max:255',
+            'prenom' => 'required|string|max:255',
             'photo' => 'nullable|string|max:255',
-            'idspecialite' => 'required|exists:specialites,id',
+            'email' => 'required|string|email|max:255|',
+            'datenaiss' => 'required|date',
+            'telephone' => 'required|string|max:15',
+            'taille' => 'nullable|string|max:10',
+            'poid' => 'nullable|numeric',
+            'role' => 'required|string|max:255',
+            'idspecialite' => 'required|string|max:255'
         ]);
 
-        $docteur = Docteur::findOrFail($id);
-        $docteur->pseudo = $request->pseudo;
-        $docteur->telephone = $request->telephone;
-        $docteur->email = $request->email;
-        $docteur->photo = $request->photo;
-        $docteur->idspecialite = $request->idspecialite;
-        $docteur->save();
-
-        return redirect()->route('docteur_index')->with('success', 'Docteur mis à jour avec succès.');
+       
+        $docteur = User::findOrFail($id);
+        // Créer un nouvel utilisateur
+        $docteur->update([
+            'nom' => $request->nom,
+            'prenom' => $request->prenom,
+            'photo' => $request->photo,
+            'email' => $request->email,
+            'datenaiss' => $request->datenaiss,
+            'telephone' => $request->telephone,
+            'taille' => $request->taille,
+            'poid' => $request->poid,
+            'role' => $request->role,
+            'idspecialite' => $request->idspecialite,
+        ]);
+     
+        // Rediriger l'utilisateur avec un message de succès
+        return redirect()->route('docteur_index')->with('success', 'docteur mise a jour avec succès. il peut maintenant vous connecter.');
+        
+       
     }
 
     /**
@@ -100,9 +138,41 @@ class DocteurController extends Controller
      */
     public function destroy(string $id)
     {
-        $docteur = Docteur::findOrFail($id);
+        $docteur = User::findOrFail($id);
         $docteur->delete();
 
         return redirect()->route('docteur_index')->with('success', 'Docteur supprimé avec succès.');
+    }
+
+
+    public function login()
+    {
+        return view('docteur/docteur_connexion');
+    }
+
+    public function loginstore(Request $request)
+    {
+        $request->validate([
+            'pseudo' => 'required|string',
+            'password' => 'required|string',
+        ]);
+
+        $docteur = Docteur::where('pseudo', $request->pseudo)->first();
+
+        if ($docteur && md5($request->password, $docteur->password)) {
+            Auth::login($docteur);
+            return redirect()->intended('docteur/interface_docteur');
+        }
+
+        return back()->withErrors([
+            'error' => 'Ces identifiants ne correspondent pas à nos enregistrements ou vous n\'êtes pas un docteur.',
+        ]);
+    }
+
+    public function interface_docteur()
+    {
+        if(Auth::check()){
+            return view('docteur/interface_docteur');
+        }
     }
 }

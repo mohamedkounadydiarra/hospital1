@@ -69,16 +69,15 @@
 
 <li class="nav-item dropdown has-arrow">
 <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
-<span class="user-img"><img class="rounded-circle" src="../../admin/assets/img/profiles/avatar-01.jpg" width="31" alt="Ryan Taylor"></span>
+<span class="user-img"><img class="rounded-circle" src="{{Auth::user()->photo}}" width="31" alt="Ryan Taylor"></span>
 </a>
 <div class="dropdown-menu">
 <div class="user-header">
-<div class="avatar avatar-sm">
-<img src="../../admin/assets/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle">
-</div>
+
 <div class="user-text">
-<h6>le nom de la session</h6>
-<p class="text-muted mb-0">../../administrator</p>
+<h6>Connecter</h6>
+<p class="text-muted mb-0">{{ Auth::user()->nom }}</p>
+<p class="text-muted mb-0">{{ Auth::user()->prenom }}</p>
 </div>
 </div>
 
@@ -99,7 +98,7 @@
 <span>Main</span>
 </li>
 <li class="active">
-<a href="index.html"><i class="fe fe-home"></i> <span>Dashboard</span></a>
+<a href="{{route('dashboard')}}"><i class="fe fe-home"></i> <span>Dashboard</span></a>
 </li>
 <li>
 <a href="{{route('docteur_create')}}"><i class="fe fe-layout"></i> <span>Ajouter docteur</span></a>
@@ -108,11 +107,19 @@
 <a href="{{route('docteur_index')}}"><i class="fe fe-users"></i> <span>Nos docteurs</span></a>
 </li>
 <li>
-<a href="{{route('formcreatespecialite')}}"><i class="fe fe-user-plus"></i> <span>Ajouter Specialite</span></a>
+<a href="{{route('specialite_create')}}"><i class="fe fe-user-plus"></i> <span>Ajouter Specialite</span></a>
 </li>
 
 <li>
-    <a href="{{route('indexspecialite')}}"><i class="fe fe-user-plus"></i> <span>Nos Specialite</span></a>
+    <a href="{{route('specialite_index')}}"><i class="fe fe-user-plus"></i> <span>Nos Specialite</span></a>
+</li>
+
+<li>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+        @csrf
+        @method('post')
+        <button type="submit" class="btn btn-danger">Logout</button>
+    </form>
 </li>
 
 </ul>

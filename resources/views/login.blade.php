@@ -23,28 +23,35 @@
                 </ul>
             </div>
              @endif
-            <form action="{{route('loginstore')}}" method="post">
+
+             @if (session('success'))
+             <div class="" style="background-color: rgb(76, 228, 152);">{{ session('success') }}</div>
+             @endif
+             
+            <form action="{{route('login_store')}}" method="post">
             @csrf 
             @method('post')
+            <label class="focus-label">Email</label>
             <div class="mb-3 form-focus">
-                <input type="text" name="pseudo" class="form-control floating">
-                <label class="focus-label">identifiant</label>
+                <input type="text" name="email" class="form-control floating">             
             </div>
+            <label class="focus-label">Password</label>
             <div class="mb-3 form-focus">
                 <input type="password" name="password" class="form-control floating">
-                <label class="focus-label">Password</label>
+            </div>
+            <label class="focus-label">Role</label>
+            <div class="mb-3 form-focus">
+                <select name="role" class="form-control">
+                    <option value="patient">Patient</option>
+                    <option value="docteur">Docteur</option>
+                    <option value="admin">Admin</option>
+                </select>
+                
             </div>
            
-            <div class="mb-3 form-focus">
-                <select class="form-control" name="role">
-                   <option value="patient">patient</option>
-                   <option value="docteur">docteur</option>
-                   <option value="admin">admin</option>
-                </select>
-               </div>
             <button class="btn btn-primary w-100 btn-lg login-btn" type="submit">Connexion</button>
             
-            <div class="text-center dont-have">Pas de compte? <a href="{{route('patientcreate')}}">Creer un compte</a></div>
+            <div class="text-center dont-have">Pas de compte? <a href="{{route('register')}}">Creer un compte</a></div>
             </form>
             </div>
             </div>

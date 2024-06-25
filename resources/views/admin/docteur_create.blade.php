@@ -31,36 +31,64 @@
         @method('post')
         <div class="row">
         <div class="col-md-4 mb-3">
-        <label class="mb-2" for="validationCustom01">Identifiant</label>
-        <input type="text" class="form-control" id="validationCustom01" name="pseudo"  required>
+        <label class="mb-2" for="validationCustom01">nom</label>
+        <input type="text" class="form-control" id="validationCustom01" value="{{old('nom')}}" name="nom"  required>
         <div class="valid-feedback">
         regarder bien
         </div>
         </div>
         <div class="col-md-4 mb-3">
-            <label class="mb-2" for="validationCustom01">Mot de passe</label>
-            <input type="password" class="form-control" id="validationCustom01" name="password" required>
+            <label class="mb-2" for="validationCustom01">prenom</label>
+            <input type="text" class="form-control" id="validationCustom01" value="{{old('prenom')}}" name="prenom" required>
             <div class="valid-feedback">
             regarder bien
             </div>
         </div>
         <div class="col-md-4 mb-3">
-            <label class="mb-2" for="validationCustom01">Telephone</label>
-            <input type="text" class="form-control" id="validationCustom01" name="telephone" required>
+            <label class="mb-2" for="validationCustom01">photo</label>
+            <input type="text" class="form-control" id="validationCustom01" value="{{old('photo')}}" name="photo" required>
             <div class="valid-feedback">
             regarder bien
             </div>
         </div>
         <div class="col-md-4 mb-3">
             <label class="mb-2" for="validationCustom01">Email</label>
-            <input type="email" class="form-control" id="validationCustom01" name="email"  required>
+            <input type="email" class="form-control" id="validationCustom01" value="{{old('email')}}" name="email"  required>
             <div class="valid-feedback">
             regarder bien
             </div>
         </div>
         <div class="col-md-4 mb-3">
-            <label class="mb-2" for="validationCustom01">Photo</label>
-            <input type="text" class="form-control" id="validationCustom01" name="photo"  required>
+            <label class="mb-2" for="validationCustom01">date de naissance</label>
+            <input type="date" class="form-control" id="validationCustom01" value="{{old('datenaiss')}}" name="datenaiss"  required>
+            <div class="valid-feedback">
+            regarder bien
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label class="mb-2" for="validationCustom01">Telephone</label>
+            <input type="text" class="form-control" id="validationCustom01" value="{{old('telephone')}}" name="telephone"  required>
+            <div class="valid-feedback">
+            regarder bien
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label class="mb-2" for="validationCustom01">mot de passe</label>
+            <input type="password" class="form-control" id="validationCustom01" value="{{old('password')}}" name="password"  required>
+            <div class="valid-feedback">
+            regarder bien
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label class="mb-2" for="validationCustom01">taille</label>
+            <input type="text" class="form-control" id="validationCustom01" value="{{old('taille')}}" name="taille"  required>
+            <div class="valid-feedback">
+            regarder bien
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label class="mb-2" for="validationCustom01">Poid</label>
+            <input type="text" class="form-control" id="validationCustom01" value="{{old('poid')}}" name="poid"  required>
             <div class="valid-feedback">
             regarder bien
             </div>
@@ -78,10 +106,10 @@
         regarder bien
         </div>
         </div>
-      
+        <input type="hidden" class="form-control" id="validationCustom01" name="role" value="docteur"  required>
         </div>
         </div>
-        <button class="btn btn-primary" type="submit">Submit form</button>
+        <button class="btn btn-primary" type="submit">Enregistrer</button>
         </form>
     </div>
     </div>

@@ -10,8 +10,8 @@ class Specialite extends Model
     use HasFactory;
     protected $fillable = ['nomspecialite','photo'];
 
-    public function patient()
+    public function user()
     {
-        return $this->hasMany(Patient::class,'idpatient');
+        return $this->hasMany(User::class,'iduser');
     }
 }

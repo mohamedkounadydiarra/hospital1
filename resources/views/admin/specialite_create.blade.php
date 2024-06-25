@@ -26,7 +26,7 @@
          @endif
 
 
-        <form class="needs-validation" action="{{ route('specialitestore') }}" method="post">
+        <form class="needs-validation" action="{{ route('specialite_store') }}" method="post">
         @csrf 
         @method('post')
         <div class="row">

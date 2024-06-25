@@ -13,7 +13,7 @@ class SpecialiteController extends Controller
     public function index()
     {
         $specialite = Specialite::orderBy('created_at','desc')->paginate('3');
-        return view('admin/indexspecialite',compact('specialite'));
+        return view('admin/specialite_index',compact('specialite'));
     }
 
     /**
@@ -21,7 +21,7 @@ class SpecialiteController extends Controller
      */
     public function create()
     {
-        return view('admin/formcreatespecialite');
+        return view('admin/specialite_create');
     }
 
     /**
@@ -38,7 +38,7 @@ class SpecialiteController extends Controller
         $existingSpecialite = Specialite::where('nomspecialite', $request->nomspecialite)->first();
 
         if ($existingSpecialite) {
-            return back()->withErrors(['nomspecialite' => 'Cette spécialité existe déjà.']);
+            return back()->withErrors(['error' => 'Cette spécialité existe déjà.']);
         }
 
         // Créer une nouvelle spécialité
@@ -65,7 +65,7 @@ class SpecialiteController extends Controller
     public function edit(string $id)
     {
         $specialite = Specialite::find($id);
-        return view('admin/editerspecialite',compact('specialite'));
+        return view('admin/specialite_edit',compact('specialite'));
     }
 
     /**
@@ -85,7 +85,7 @@ class SpecialiteController extends Controller
         $specialite->save();
 
         // Redirection avec un message de succès
-        return redirect()->route('indexspecialite')->with('success', 'Spécialité mise a jour avec succès!');
+        return redirect()->route('specialite_index')->with('success', 'Spécialité mise a jour avec succès!');
     }
 
     /**
